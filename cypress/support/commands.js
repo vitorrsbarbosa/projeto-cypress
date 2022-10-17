@@ -86,6 +86,7 @@ Cypress.Commands.add('updateNote', (note, newNote, attachFile = false, file) => 
   attachFile = true
   cy.intercept('GET', '**/notes').as('getNotes')
   cy.intercept('GET', '**/notes/**').as('getNote')
+  cy.visit('/notes')
   cy.contains('.list-group-item', note).should('be.visible').click()
   cy.wait('@getNote')
   cy.get('#content')
@@ -101,6 +102,7 @@ Cypress.Commands.add('updateNote', (note, newNote, attachFile = false, file) => 
 Cypress.Commands.add('deleteNote', (newNote) => {
   cy.intercept('GET', '**/notes').as('getNotes')
   cy.intercept('GET', '**/notes/**').as('getNote')
+  cy.visit('/notes')
   cy.contains('.list-group-item', newNote).should('be.visible').click()
   cy.wait('@getNote')
   cy.contains('button', 'Delete').click()
