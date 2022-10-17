@@ -1,1 +1,7 @@
-{}
+{
+  "baseUrl": "https://notes-serverless-app.com",
+  "requestTimeout": 10000,
+  "responseTimeout": 10000,
+  "defaultCommandTimeout": 10000,
+  "pageLoadTimeout": 10000
+}
