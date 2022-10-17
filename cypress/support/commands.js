@@ -35,3 +35,12 @@ Cypress.Commands.add('fillSignupFormAndSubmit', (email, password) => {
 Cypress.Commands.add('fillSecretField', (passwordField, passwordText) => {
   cy.get(passwordField).type(passwordText, { log: false })
 })
+
+Cypress.Commands.add('login', (
+  login = Cypress.env('USER_EMAIL'),
+  password = Cypress.env('USER_PASSWORD')) => {
+  cy.visit('/login')
+  cy.get('#email').type(login)
+  cy.fillSecretField('#password', password)
+  cy.contains('button', 'Login').click()
+})
