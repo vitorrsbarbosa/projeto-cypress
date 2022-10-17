@@ -65,3 +65,51 @@ Cypress.Commands.add('login', (
     login()
   }
 })
+
+Cypress.Commands.add('createNote', (note, attachFile = false, file) => {
+  attachFile = false
+  cy.intercept('GET', '**/notes').as('getNotes')
+  cy.intercept('GET', '**/notes/**').as('getNote')
+  cy.visit('/notes/new')
+  cy.wait('@getNote')
+  cy.get('#content').type(note)
+  attachFileHandler(attachFile, file)
+  cy.contains('button', 'Create').click()
+  cy.wait('@getNotes')
+})
+
+Cypress.Commands.add('readNote', () => {
+
+})
+
+Cypress.Commands.add('updateNote', (note, newNote, attachFile = false, file) => {
+  attachFile = true
+  cy.intercept('GET', '**/notes').as('getNotes')
+  cy.intercept('GET', '**/notes/**').as('getNote')
+  cy.contains('.list-group-item', note).should('be.visible').click()
+  cy.wait('@getNote')
+  cy.get('#content')
+    .clear()
+    .type(newNote)
+  attachFileHandler(attachFile, file)
+  cy.contains('button', 'Save').click()
+  cy.wait('@getNotes')
+  cy.contains('.list-group-item', note).should('not.exist')
+  cy.contains('.list-group-item', newNote).should('be.visible')
+})
+
+Cypress.Commands.add('deleteNote', (newNote) => {
+  cy.intercept('GET', '**/notes').as('getNotes')
+  cy.intercept('GET', '**/notes/**').as('getNote')
+  cy.contains('.list-group-item', newNote).should('be.visible').click()
+  cy.wait('@getNote')
+  cy.contains('button', 'Delete').click()
+  cy.wait('@getNotes')
+  cy.contains('.list-group-item', newNote).should('not.exist')
+})
+
+const attachFileHandler = (attachFile, file) => {
+  if (attachFile) {
+    cy.get('#file').attachFile(file)
+  }
+}
