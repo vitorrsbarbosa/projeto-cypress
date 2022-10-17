@@ -36,11 +36,32 @@ Cypress.Commands.add('fillSecretField', (passwordField, passwordText) => {
   cy.get(passwordField).type(passwordText, { log: false })
 })
 
+// Cypress.Commands.add('login', (
+//   login = Cypress.env('USER_EMAIL'),
+//   password = Cypress.env('USER_PASSWORD')) => {
+//   cy.visit('/login')
+//   cy.get('#email').type(login)
+//   cy.fillSecretField('#password', password)
+//   cy.contains('button', 'Login').click()
+//   cy.contains('h1', 'Your Notes').should('be.visible')
+// })
+
 Cypress.Commands.add('login', (
-  login = Cypress.env('USER_EMAIL'),
-  password = Cypress.env('USER_PASSWORD')) => {
-  cy.visit('/login')
-  cy.get('#email').type(login)
-  cy.fillSecretField('#password', password)
-  cy.contains('button', 'Login').click()
+  username = Cypress.env('USER_EMAIL'),
+  password = Cypress.env('USER_PASSWORD'),
+  { cacheSession = true } = {}
+) => {
+  const login = () => {
+    cy.visit('/login')
+    cy.get('#email').type(username)
+    cy.fillSecretField('#password', password)
+    cy.contains('button', 'Login').click()
+    cy.contains('h1', 'Your Notes').should('be.visible')
+  }
+
+  if (cacheSession) {
+    cy.session([username, password], login)
+  } else {
+    login()
+  }
 })
