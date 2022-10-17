@@ -26,8 +26,12 @@
 Cypress.Commands.add('fillSignupFormAndSubmit', (email, password) => {
   cy.visit('/signup')
   cy.get('#email').type(email)
-  cy.get('#password').type(password, { log: false })
-  cy.get('#confirmPassword').type(password, { log: false })
+  cy.fillSecretField('#password', password)
+  cy.fillSecretField('#confirmPassword', password)
   cy.contains('button', 'Signup').click()
   cy.get('#confirmationCode').should('be.visible')
+})
+
+Cypress.Commands.add('fillSecretField', (passwordField, passwordText) => {
+  cy.get(passwordField).type(passwordText, { log: false })
 })
