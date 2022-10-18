@@ -9,6 +9,7 @@ describe('Scenarios where authentication is required', () => {
   beforeEach('login', () => {
     cy.intercept('GET', '**/notes').as('getNotes')
     cy.intercept('GET', '**/notes/**').as('getNote')
+    cy.intercept('POST', '**/prod/billing').as('postPaymentRequest')
     cy.login()
   })
   it('Should CRUD a simple note test', () => {
@@ -77,5 +78,12 @@ describe('Scenarios where authentication is required', () => {
   })
   it('Should delete a note', () => {
     cy.deleteNote(updatedNote)
+  })
+  it('Should successfully submit the form', () => {
+    cy.fillSettingsFormAndSubmit()
+    cy.wait('@getNotes')
+    cy.wait('@postPaymentRequest').then(response => {
+      expect(response.state).to.equal('Complete')
+    })
   })
 })
