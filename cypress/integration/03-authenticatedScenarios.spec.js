@@ -86,7 +86,7 @@ describe('Scenarios where authentication is required', () => {
       expect(response.state).to.equal('Complete')
     })
   })
-  it.only('Should log out', () => {
+  it('Should log out', () => {
     cy.visit('/')
     cy.wait('@getNotes')
     cy.validateViewport()
