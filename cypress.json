@@ -5,5 +5,6 @@
   "pageLoadTimeout": 15000,
   "defaultCommandTimeout": 15000,
   "experimentalSessionSupport": true,
-  "chromeWebSecurity": false
+  "chromeWebSecurity": false,
+  "experimentalStudio": true
 }

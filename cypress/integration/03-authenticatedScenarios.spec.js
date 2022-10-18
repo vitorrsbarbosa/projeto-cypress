@@ -86,4 +86,12 @@ describe('Scenarios where authentication is required', () => {
       expect(response.state).to.equal('Complete')
     })
   })
+  it.only('Should log out', () => {
+    cy.visit('/')
+    cy.wait('@getNotes')
+    /* ==== Generated with Cypress Studio ==== */
+    cy.get('.nav :nth-child(2) a').click()
+    cy.get('#email').should('be.visible')
+    /* ==== End Cypress Studio ==== */
+  })
 })
