@@ -1,8 +1,8 @@
 {
   "baseUrl": "https://notes-serverless-app.com",
-  "requestTimeout": 10000,
-  "responseTimeout": 10000,
-  "defaultCommandTimeout": 10000,
-  "pageLoadTimeout": 10000,
+  "requestTimeout": 15000,
+  "responseTimeout": 15000,
+  "defaultCommandTimeout": 15000,
+  "pageLoadTimeout": 15000,
   "experimentalSessionSupport": true
 }
