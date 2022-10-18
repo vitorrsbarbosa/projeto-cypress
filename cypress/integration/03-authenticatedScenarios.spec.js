@@ -7,25 +7,28 @@ describe('Scenarios where authentication is required', () => {
   const updatedNote = faker.lorem.words(4)
 
   beforeEach('login', () => {
+    cy.intercept('GET', '**/notes').as('getNotes')
+    cy.intercept('GET', '**/notes/**').as('getNote')
     cy.login()
   })
   it('Should CRUD a simple note test', () => {
     const note = faker.lorem.words(4)
-    cy.intercept('GET', '**/notes').as('getNotes')
-    cy.intercept('GET', '**/notes/**').as('getNote')
-
     // Create
     cy.visit('/notes/new')
-    cy.wait('@getNote')
     cy.get('#content').type(note)
     cy.contains('button', 'Create').click()
-
     cy.wait('@getNotes')
     cy.contains('.list-group-item', note)
       .should('be.visible')
-      .click()
-
+    // Read
+    cy.visit('/')
+    cy.wait('@getNotes')
+    cy.get('div[class=list-group]')
+      .should('be.visible')
     // Update
+    cy.contains('.list-group-item', note)
+      .should('be.visible')
+      .click()
     cy.wait('@getNote')
     cy.get('#content').clear().type(updatedNote)
     cy.contains('button', 'Save').click()
@@ -36,20 +39,16 @@ describe('Scenarios where authentication is required', () => {
     cy.contains('.list-group-item', updatedNote)
       .should('be.visible')
       .click()
-
     cy.wait('@getNote')
     cy.contains('button', 'Delete').click()
-
     cy.wait('@getNotes')
     cy.contains('.list-group-item', updatedNote).should('not.exist')
-
   })
   it('Should CRUD a note with an uploaded file segregated logic test', () => {
     const note = faker.lorem.words(4)
-    cy.intercept('GET', '**/notes').as('getNotes')
-
     cy.createNote(note, attachFile, file)
     cy.wait('@getNotes')
+    cy.readNote()
     attachFile = false
     cy.updateNote(updatedNote, attachFile, file)
     cy.wait('@getNotes')
