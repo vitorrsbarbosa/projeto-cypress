@@ -132,3 +132,11 @@ Cypress.Commands.add('fillSettingsFormAndSubmit', () => {
     .type('12345')
   cy.contains('button', 'Purchase').click()
 })
+
+Cypress.Commands.add('validateViewport', () => {
+  if (Cypress.config('viewportWidth') < Cypress.env('viewportWidthBreakpoint')) {
+    cy.get('button.navbar-toggle')
+      .should('be.visible')
+      .click()
+  }
+})
