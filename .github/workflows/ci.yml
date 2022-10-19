@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [12,14,16]
+        node: [14,16]
     container: cypress/browsers:latest
     name: E2E on Node v${{ matrix.node }}
     steps:
@@ -29,19 +29,9 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: node -v
-
-      - name: Checkout
-      - uses: actions/checkout@master
-      - name: Install dependencies
-        uses: cypress-io/github-actions@v4
-        with:
-          # Just perform install
-          runTests: false
-
       - name: Run end-to-end tests on desktop viewport 🧪
         uses: cypress-io/github-action@v4
         with:
-          install: false
           tag: node-${{ matrix.node }}
         env:
           CYPRESS_USER_EMAIL: ${{ secrets.CYPRESS_USER_EMAIL }}
@@ -55,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [12,14,16]
+        node: [14,16]
     container: cypress/browsers:latest
     name: E2E on Node v${{ matrix.node }}
     steps:
@@ -64,19 +54,9 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: node -v
-
-      - name: Checkout
-      - uses: actions/checkout@master
-      - name: Install dependencies
-        uses: cypress-io/github-actions@v4
-        with:
-          # Just perform install
-          runTests: false
-
       - name: Run end-to-end tests on tablet viewport 🧪
         uses: cypress-io/github-action@v4
         with:
-          install: false
           tag: node-${{ matrix.node }}
         env:
           CYPRESS_USER_EMAIL: ${{ secrets.CYPRESS_USER_EMAIL }}
