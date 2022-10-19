@@ -6,5 +6,6 @@
   "defaultCommandTimeout": 25000,
   "experimentalSessionSupport": true,
   "chromeWebSecurity": false,
-  "experimentalStudio": true
+  "experimentalStudio": true,
+  "projectId":"sgi4di"
 }
