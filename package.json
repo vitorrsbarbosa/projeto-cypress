@@ -22,5 +22,6 @@
     "eslint": "^7.32.0",
     "eslint-plugin-cypress": "^2.11.3",
     "faker": "^5.5.3"
-  }
+  },
+  "dependencies": {}
 }
