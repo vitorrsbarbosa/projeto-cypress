@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 /// <reference types="cypress-iframe" />
+/// <reference path="../support/commands.d.ts" />
 
 describe('Scenarios where authentication is required', () => {
   let attachFile = true
