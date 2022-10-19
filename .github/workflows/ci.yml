@@ -26,19 +26,17 @@ jobs:
     steps:
       - name: Setup Node
         uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node }}
       - run: node -v
       - name: Run end-to-end tests on desktop viewport 🧪
         uses: cypress-io/github-action@v4
-        with:
-          tag: node-${{ matrix.node }}
         env:
           CYPRESS_USER_EMAIL: ${{ secrets.CYPRESS_USER_EMAIL }}
           CYPRESS_USER_PASSWORD: ${{ secrets.CYPRESS_USER_PASSWORD }}
           CYPRESS_MAILOSAUR_SERVER_ID: ${{ secrets.CYPRESS_MAILOSAUR_SERVER_ID }}
           CYPRESS_MAILOSAUR_API_KEY: ${{ secrets.CYPRESS_MAILOSAUR_API_KEY }}
         with:
+          node-version: ${{ matrix.node }}
+          tag: node-${{ matrix.node }}
           command: npm test
   cypress-tests-tablet:
     needs: eslint
@@ -51,15 +49,13 @@ jobs:
     steps:
       - name: Setup Node
         uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node }}
       - run: node -v
       - name: Run end-to-end tests on tablet viewport 🧪
         uses: cypress-io/github-action@v4
-        with:
-          tag: node-${{ matrix.node }}
         env:
           CYPRESS_USER_EMAIL: ${{ secrets.CYPRESS_USER_EMAIL }}
           CYPRESS_USER_PASSWORD: ${{ secrets.CYPRESS_USER_PASSWORD }}
         with:
+          node-version: ${{ matrix.node }}
+          tag: node-${{ matrix.node }}
           command: npm run test:tablet
