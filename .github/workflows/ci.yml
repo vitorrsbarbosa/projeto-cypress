@@ -3,18 +3,18 @@ name: ci
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
 
 jobs:
   eslint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Install modules
-        run: npm install
-      - name: Run ESLint
-        run: npm run lint
+    - uses: actions/checkout@v2
+    - name: Install modules
+      run: npm install
+    - name: Run ESLint
+      run: npm run lint
   cypress-tests-desktop:
     needs: eslint
     runs-on: ubuntu-latest
