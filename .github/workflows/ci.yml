@@ -18,42 +18,32 @@ jobs:
   cypress-tests-desktop:
     needs: eslint
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [14,16]
-    container: cypress/browsers:latest
-    name: E2E on Node v${{ matrix.node }}
+    container: cypress/browsers:node12.18.3-chrome87-ff82
     steps:
-      - name: Setup Node
-        uses: actions/setup-node@v1
-      - run: node -v
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: Run end-to-end tests on desktop viewport 🧪
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v2
         env:
           CYPRESS_USER_EMAIL: ${{ secrets.CYPRESS_USER_EMAIL }}
           CYPRESS_USER_PASSWORD: ${{ secrets.CYPRESS_USER_PASSWORD }}
           CYPRESS_MAILOSAUR_SERVER_ID: ${{ secrets.CYPRESS_MAILOSAUR_SERVER_ID }}
           CYPRESS_MAILOSAUR_API_KEY: ${{ secrets.CYPRESS_MAILOSAUR_API_KEY }}
         with:
-          tag: node-${{ matrix.node }}
           command: npm test
   cypress-tests-tablet:
     needs: eslint
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [14,16]
-    container: cypress/browsers:latest
-    name: E2E on Node v${{ matrix.node }}
+    container: cypress/browsers:node12.18.3-chrome87-ff82
     steps:
-      - name: Setup Node
-        uses: actions/setup-node@v1
-      - run: node -v
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: Run end-to-end tests on tablet viewport 🧪
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v2
         env:
           CYPRESS_USER_EMAIL: ${{ secrets.CYPRESS_USER_EMAIL }}
           CYPRESS_USER_PASSWORD: ${{ secrets.CYPRESS_USER_PASSWORD }}
         with:
-          tag: node-${{ matrix.node }}
           command: npm run test:tablet
