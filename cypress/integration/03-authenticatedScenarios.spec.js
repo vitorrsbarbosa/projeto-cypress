@@ -91,7 +91,7 @@ describe('Scenarios where authentication is required', () => {
     cy.wait('@getNotes')
     cy.validateViewport()
     /* ==== Generated with Cypress Studio ==== */
-    cy.get('.nav :nth-child(2) a').click()
+    cy.get('.nav :nth-child(2) a').click({ force: true })
     cy.get('#email').should('be.visible')
     /* ==== End Cypress Studio ==== */
   })
