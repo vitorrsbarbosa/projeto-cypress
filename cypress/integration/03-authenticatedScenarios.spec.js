@@ -88,7 +88,7 @@ describe('Scenarios where authentication is required', () => {
   })
   it.only('Should log out', () => {
     cy.visit('/')
-    cy.wait(3000)
+    cy.wait('@getNotes')
     // cy.validateViewport()
     /* ==== Generated with Cypress Studio ==== */
     cy.get('.nav :nth-child(2) a').click()
