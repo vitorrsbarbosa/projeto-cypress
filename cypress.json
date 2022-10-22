@@ -7,5 +7,9 @@
   "experimentalSessionSupport": true,
   "chromeWebSecurity": false,
   "experimentalStudio": true,
-  "projectId":"sgi4di"
+  "projectId":"sgi4di",
+  "retries": {
+    "runMode": 2,
+    "openMode": 0
+  }
 }
