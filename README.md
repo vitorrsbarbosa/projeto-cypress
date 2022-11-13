@@ -11,7 +11,7 @@ To run this project you'll need the following:
 - [git](https://git-scm.com/downloads) (Currently using version `2.38.1.windows.1` while writing the document)
 - [nodejs](https://nodejs.org) (Currently using version `14.17.3`)
 - NPM (Currently using version `6.14.13`)
-- [Microsoft Edge](https://www.microsoft.com/en-us/edge)(Currently using version `106.0.1370.47)
+- [Microsoft Edge](https://www.microsoft.com/en-us/edge)(Currently using version `106.0.1370.47`)
 
 **Note:** When installing nodejs, NPM is automatically installed too.
 
